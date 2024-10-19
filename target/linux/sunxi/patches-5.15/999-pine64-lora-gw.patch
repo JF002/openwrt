@@ -1,0 +1,56 @@
+Index: linux-5.15.167/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+===================================================================
+--- linux-5.15.167.orig/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
++++ linux-5.15.167/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
+@@ -199,7 +199,7 @@
+ &uart2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&uart2_pins>;
+-	status = "disabled";
++	status = "okay";
+ };
+ 
+ /* On Euler connector */
+Index: linux-5.15.167/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+===================================================================
+--- linux-5.15.167.orig/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
++++ linux-5.15.167/arch/arm64/boot/dts/allwinner/sun50i-a64-sopine.dtsi
+@@ -52,34 +52,11 @@
+ &spi0  {
+ 	status = "okay";
+ 
+-	flash@0 {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "jedec,spi-nor";
++	spidev@0 {
++		compatible = "semtech,sx1301";
++		status = "okay";
+ 		reg = <0>;
+-		spi-max-frequency = <40000000>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				label = "u-boot";
+-				reg = <0x000000 0x0E0000>;
+-			};
+-
+-			partition@e0000 {
+-				label = "u-boot-env";
+-				reg = <0x0E0000 0x020000>;
+-			};
+-
+-			partition@100000 {
+-				compatible = "denx,fit";
+-				label = "firmware";
+-				reg = <0x100000 0xF00000>;
+-			};
+-		};
++		spi-max-frequency = <1000000>;
+ 	};
+ };
+ 

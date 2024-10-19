@@ -1,3 +1,19 @@
+**The original content of README.md is available below)**
+
+# OpenWRT on Pine64 PineDio LoRa GW
+This fork add support for the [Pine64 PineDio LoRa Gateway](https://pine64.org/documentation/Pinedio/Gateway/) in OpenWRT. This fork is based on [OpenWRT 23.05.05](https://github.com/openwrt/openwrt/tree/v23.05.5).
+
+The following changes are needed for the LoRa Packet Forwarder to run and connect to [The Things Network](https://www.thethingsnetwork.org/):
+ - [PATCH](https://github.com/JF002/openwrt/blob/pinedio-lora-gw/target/linux/sunxi/patches-5.15/999-pine64-lora-gw.patch) Edit the DTS file to enable SPI0 and UART2. Those peripherals are needed to communicate with the LoRa module and its GPS.
+ - Modify the package `sx1302_hal` to build the packet_forwarder application and to fix 2 issues
+   - [Makefile](https://github.com/JF002/openwrt-pinedio-lora-gw-custom-feed/blob/master/sx1302_hal_pine64/Makefile#L93) Disable the temperature sensor which does not seems to be available on our board (to be confirmed)
+   - [PATCH](https://github.com/JF002/openwrt-pinedio-lora-gw-custom-feed/blob/master/sx1302_hal_pine64/patches/999-fix-and-deploy-packet-forwarder.patch) Move a big buffer from the stach to the heap to avoid a SEFGAULT (the size of the stack on OpenWRT is probably smaller than on regular Linux OS).
+
+## TODO
+[ ] Automatically start the forwarder at boot time
+[ ] Enable WiFi
+[ ] Provide generic configuration file for the lora packet forwarder application and document how to edit them
+
 ![OpenWrt logo](include/logo.png)
 
 OpenWrt Project is a Linux operating system targeting embedded devices. Instead

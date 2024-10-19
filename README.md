@@ -9,10 +9,29 @@ The following changes are needed for the LoRa Packet Forwarder to run and connec
    - [Makefile](https://github.com/JF002/openwrt-pinedio-lora-gw-custom-feed/blob/master/sx1302_hal_pine64/Makefile#L93) Disable the temperature sensor which does not seems to be available on our board (to be confirmed)
    - [PATCH](https://github.com/JF002/openwrt-pinedio-lora-gw-custom-feed/blob/master/sx1302_hal_pine64/patches/999-fix-and-deploy-packet-forwarder.patch) Move a big buffer from the stach to the heap to avoid a SEFGAULT (the size of the stack on OpenWRT is probably smaller than on regular Linux OS).
 
+## How to build
+Follow the [original instructions from OpenWRT](https://github.com/openwrt/openwrt?tab=readme-ov-file#quickstart). The only additional step consists in copying `.config_pine64_pinedio_lora_gw` into .config to ensure that all options and settings are correctly applied to work with the LoRa gateway.
+
+```sh
+git clone git@github.com:JF002/openwrt.git -b pinedio-lora-gw
+cd openwrt
+./scripts/feeds update -a
+./scripts/feeds install -a
+cp .config_pine64_pinedio_lora_gw .config
+make 
+```
+
+## How to run the lora packet forwarder?
+<TODO>
+
+## How to run other test programs ?
+<TODO>
+
 ## TODO
  - [ ] Automatically start the forwarder at boot time
  - [ ] Enable WiFi
- -  [ ] Provide generic configuration file for the lora packet forwarder application and document how to edit them
+ - [ ] Provide generic configuration file for the lora packet forwarder application and document how to edit them
+ - [ ] Enable logs for the lora packet forwarder
 
 ---
 

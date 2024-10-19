@@ -10,9 +10,11 @@ The following changes are needed for the LoRa Packet Forwarder to run and connec
    - [PATCH](https://github.com/JF002/openwrt-pinedio-lora-gw-custom-feed/blob/master/sx1302_hal_pine64/patches/999-fix-and-deploy-packet-forwarder.patch) Move a big buffer from the stach to the heap to avoid a SEFGAULT (the size of the stack on OpenWRT is probably smaller than on regular Linux OS).
 
 ## TODO
-[ ] Automatically start the forwarder at boot time
-[ ] Enable WiFi
-[ ] Provide generic configuration file for the lora packet forwarder application and document how to edit them
+ - [ ] Automatically start the forwarder at boot time
+ - [ ] Enable WiFi
+ -  [ ] Provide generic configuration file for the lora packet forwarder application and document how to edit them
+
+---
 
 ![OpenWrt logo](include/logo.png)
 
